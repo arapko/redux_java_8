@@ -1,17 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+// Observer - Наблюдатель
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import {createStore} from "./createStore";
+import {countReducer} from "./countReducer";
+import {ADD, SUB} from "./types";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+//import {createStore} from "redux";
+
+const addBtn = document.getElementById('add');
+const subBtn = document.getElementById('sub');
+const counterText = document.getElementById('counter');
+//Ctrl+Shift+Alt+L
+
+const store = createStore(countReducer,0);
+
+addBtn.addEventListener('click', () => {
+    store.dispatch({type:ADD});
+});
+
+subBtn.addEventListener('click', () => {
+    store.dispatch({type:SUB});
+});
+
+store.subscribe(()=>{
+    counterText.textContent = store.getState().toString();
+})
