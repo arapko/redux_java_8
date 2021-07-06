@@ -1,4 +1,8 @@
-import {GET_WEATHER_FAILURE, GET_WEATHER_LOADING, GET_WEATHER_SUCCESS} from "./types";
+import {
+    GET_LOCATION_FAILURE,
+    GET_LOCATION_LOADING,
+    GET_LOCATION_SUCCESS
+} from "./types";
 
 const initialState = {
     data: null,
@@ -6,21 +10,21 @@ const initialState = {
     error:null
 }
 
-export default function weatherReducer(state=initialState,action){
+export default function locationReducer(state=initialState,action){
     switch (action.type){
-        case GET_WEATHER_LOADING:
+        case GET_LOCATION_LOADING:
             return{
                 ...state,
                 loading:true
             }
-        case GET_WEATHER_SUCCESS:
+        case GET_LOCATION_SUCCESS:
             const {data} = action.payload;
             return {
                 ...state,
                 data,
                 loading: false
             }
-        case GET_WEATHER_FAILURE:
+        case GET_LOCATION_FAILURE:
             const {error} = action.payload;
             return {
                 ...state,

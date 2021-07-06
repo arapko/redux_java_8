@@ -5,15 +5,11 @@ import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import weatherReducer from "../redux/weatherReducer";
 import {asyncWeather} from "../redux/apiActions";
+import {Store} from "../redux/Store";
 
 export function Form(){
     const [city,setCity] = useState();
-    const reducers = combineReducers({
-        counts:countReducer,
-        weather:weatherReducer
-    })
-
-    const store = createStore(reducers,{}, composeWithDevTools(applyMiddleware(thunk)));
+    const store = Store.useStore();
 
     const handleSubmit = (event)=>{
         event.preventDefault();
